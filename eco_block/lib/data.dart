@@ -25,7 +25,7 @@ List<Transaction> transactions = [
   Transaction(
       type: "Deposit",
       dateAndTime: DateTime.utc(2021, 3, 20, 9, 33, 27),
-      amount: 1523.456),
+      amount: 1523.45),
   Transaction(
       type: "Withdraw",
       dateAndTime: DateTime.utc(2021, 3, 12, 15, 27, 05),

@@ -38,6 +38,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Header(title: "Overview"),
             Dashboard(),
+            Buttons(),
             Header(title: "Finances"),
             Header(title: "Transactions"),
             for (Transaction trans in transactions)
@@ -72,7 +73,7 @@ class HomePage extends StatelessWidget {
                       top: 10,
                       right: 0,
                       child: Text(
-                        trans.amount.toString() + ' EBT',
+                        trans.amount.toString(),
                         style: GoogleFonts.karla(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
