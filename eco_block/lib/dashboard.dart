@@ -112,7 +112,7 @@ class Buttons extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) =>
-                      WithdrawPage(),
+                      DepositPage(),
                 ),
               );
             },

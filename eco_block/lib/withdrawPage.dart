@@ -40,7 +40,7 @@ class WithdrawPage extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 50),
                   height:
-                      MediaQuery.of(context).size.height - 200, //guessed 200
+                      MediaQuery.of(context).size.height - 220, //guessed 200
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.vertical(top: Radius.circular(25)),
@@ -96,12 +96,16 @@ class WithdrawPage extends StatelessWidget {
                               cursorColor: Colors.black,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                labelText: 'EBT',
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                labelText: 'COIN',
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[200]),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[200]),
                                 ),
                               ),
                             ),
@@ -122,23 +126,23 @@ class WithdrawPage extends StatelessWidget {
                               children: [
                                 for (int i = 0; i < 3; i++) //3 containers
                                   Container(
-                                    height: 20,
-                                    width: 72,
+                                    height: 30,
+                                    width: 75,
                                     child: TextField(
                                       cursorColor: Colors.black,
                                       keyboardType: TextInputType.number,
                                       maxLength: 3,
                                       decoration: InputDecoration(
-                                        // filled: true,
+                                        filled: true,
                                         counterText: '',
-                                        // fillColor: Colors.white54,
+                                        fillColor: Colors.grey[200],
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.grey),
+                                          borderSide: BorderSide(
+                                              color: Colors.grey[200]),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.black),
+                                          borderSide: BorderSide(
+                                              color: Colors.grey[200]),
                                         ),
                                       ),
                                     ),

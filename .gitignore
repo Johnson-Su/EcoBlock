@@ -1,0 +1,5 @@
+EcoChainNode/node_modules
+EcoChainNode/npm-debug.log
+.idea
+EcoChainNode/src/*.js
+EcoChainNode/src/*.map
