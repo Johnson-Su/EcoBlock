@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dashboard.dart';
+import 'data.dart';
 
 //For titles
 class Header extends StatefulWidget {
@@ -39,6 +40,48 @@ class HomePage extends StatelessWidget {
             Dashboard(),
             Header(title: "Finances"),
             Header(title: "Transactions"),
+            for (Transaction trans in transactions)
+              Container(
+                height: 40,
+                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 2.0),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.grey),
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      child: Text(
+                        trans.type,
+                        style: GoogleFonts.karla(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Positioned(
+                      top: 20,
+                      child: Text(
+                        dateFormat.format(trans.dateAndTime).toString(),
+                        style: GoogleFonts.karla(
+                            fontSize: 11, color: Colors.black),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      right: 0,
+                      child: Text(
+                        trans.amount.toString() + ' EBT',
+                        style: GoogleFonts.karla(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
           ],
         ),
       ),
