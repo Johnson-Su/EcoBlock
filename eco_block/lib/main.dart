@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dashboard.dart';
 
 //For titles
 class Header extends StatefulWidget {
@@ -35,6 +36,9 @@ class HomePage extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Header(title: "Overview"),
+            Dashboard(),
+            Header(title: "Finances"),
+            Header(title: "Transactions"),
           ],
         ),
       ),
