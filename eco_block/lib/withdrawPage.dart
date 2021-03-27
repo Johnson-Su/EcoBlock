@@ -96,12 +96,16 @@ class WithdrawPage extends StatelessWidget {
                               cursorColor: Colors.black,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey[200],
                                 labelText: 'EBT',
                                 enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[200]),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[200]),
                                 ),
                               ),
                             ),
@@ -129,16 +133,16 @@ class WithdrawPage extends StatelessWidget {
                                       keyboardType: TextInputType.number,
                                       maxLength: 3,
                                       decoration: InputDecoration(
-                                        // filled: true,
+                                        filled: true,
                                         counterText: '',
-                                        // fillColor: Colors.white54,
+                                        fillColor: Colors.grey[200],
                                         enabledBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.grey),
+                                          borderSide: BorderSide(
+                                              color: Colors.grey[200]),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.black),
+                                          borderSide: BorderSide(
+                                              color: Colors.grey[200]),
                                         ),
                                       ),
                                     ),
