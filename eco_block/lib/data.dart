@@ -9,7 +9,7 @@ class User {
 }
 
 final User user1 =
-    User(name: "Johnson Su", UID: "123 456 789", balance: 173453.0);
+    User(name: "Johnson Su", UID: "527 932 673", balance: 17348.00);
 
 class Transaction {
   String type; //deposit or withdraw

@@ -12,10 +12,10 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 16.0),
-      height: 145,
-      width: 335,
+      height: 180,
+      width: 315,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(16),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment(0.6, 0.9),
@@ -25,43 +25,49 @@ class Dashboard extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Positioned(
-            top: 20,
-            left: 20,
+            top: 24,
+            left: 24,
             child: Text(
               user1.name,
               style: GoogleFonts.karla(
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
           ),
           Positioned(
-            top: 20,
-            right: 20,
+            top: 24,
+            right: 24,
             child: Container(
               child: Image.asset('images/logo.png', height: 50, width: 50),
             ),
           ),
           Positioned(
-            top: 38,
-            left: 20,
+            top: 48,
+            left: 24,
             child: Text(
               "UID: " + user1.UID,
-              style: GoogleFonts.karla(fontSize: 12, color: Colors.white),
+              style: GoogleFonts.karla(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.white.withOpacity(0.8)),
             ),
           ),
           Positioned(
-            top: 73,
-            left: 20,
+            bottom: 58,
+            left: 24,
             child: Text(
               "BALANCE",
-              style: GoogleFonts.karla(fontSize: 12, color: Colors.white),
+              style: GoogleFonts.karla(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.white.withOpacity(0.8)),
             ),
           ),
           Row(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(top: 90, left: 20),
+                padding: EdgeInsets.only(top:122, left: 24),
                 child: Text(
                   balanceFormat.format(user1.balance).toString(),
                   style: GoogleFonts.karla(
@@ -71,11 +77,11 @@ class Dashboard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 98, left: 3),
+                padding: EdgeInsets.only(top: 128, left: 4),
                 child: Text(
                   "COIN",
                   style: GoogleFonts.karla(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -97,9 +103,9 @@ class Buttons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          margin: EdgeInsets.only(top: 9.0, left: 20.0),
-          height: 45,
-          width: 155,
+          margin: EdgeInsets.only(top: 24.0, left: 30.0),
+          height: 40,
+          width: 135,
           child: ElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -113,7 +119,7 @@ class Buttons extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.all(0.0),
               shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(12.0),
+                borderRadius: new BorderRadius.circular(10.0),
               ),
             ),
             child: Ink(

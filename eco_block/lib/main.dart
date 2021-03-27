@@ -15,12 +15,11 @@ class HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4.0),
       child: Text(
         widget.title,
         style: GoogleFonts.karla(
-            height: 3.2,
-            fontSize: 21,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.black),
       ),
@@ -36,18 +35,17 @@ class HomePage extends StatelessWidget {
         color: Colors.white,
         child: ListView(
           children: <Widget>[
-            Header(title: "Overview"),
             Dashboard(),
             Buttons(),
             Header(title: "Finances"),
             Header(title: "Transactions"),
             for (Transaction trans in transactions)
               Container(
-                height: 40,
-                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 2.0),
+                height: 50,
+                margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(color: Colors.grey),
+                    bottom: BorderSide(color: Color(0xffC6C6C6)),
                   ),
                 ),
                 child: Stack(
@@ -56,7 +54,7 @@ class HomePage extends StatelessWidget {
                       child: Text(
                         trans.type,
                         style: GoogleFonts.karla(
-                            fontSize: 15,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
@@ -66,7 +64,7 @@ class HomePage extends StatelessWidget {
                       child: Text(
                         dateFormat.format(trans.dateAndTime).toString(),
                         style: GoogleFonts.karla(
-                            fontSize: 11, color: Colors.black),
+                            fontSize: 12, color: Color(0xff707070)),
                       ),
                     ),
                     Positioned(
@@ -75,7 +73,7 @@ class HomePage extends StatelessWidget {
                       child: Text(
                         trans.amount.toString(),
                         style: GoogleFonts.karla(
-                            fontSize: 15,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
