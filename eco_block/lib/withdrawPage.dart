@@ -153,11 +153,11 @@ class WithdrawPage extends StatelessWidget {
                             //Confirm button
                             Center(
                               child: Container(
-                                margin: EdgeInsets.only(top: 30),
+                                margin: EdgeInsets.only(top: 42),
                                 height: 40,
                                 width: 140,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
                                     padding: EdgeInsets.all(0.0),
                                     shape: new RoundedRectangleBorder(
                                       borderRadius:

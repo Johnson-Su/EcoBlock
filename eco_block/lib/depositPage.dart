@@ -69,7 +69,7 @@ class DepositPage extends StatelessWidget {
                               "To deposit, send EBT to your UID address listed below.",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.karla(
-                                  fontSize: 15,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
@@ -108,11 +108,11 @@ class DepositPage extends StatelessWidget {
                         //Got It button
                         Center(
                           child: Container(
-                            margin: EdgeInsets.only(top: 30),
+                            margin: EdgeInsets.only(top: 42),
                             height: 40,
                             width: 140,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
+                            child: TextButton(
+                              style: TextButton.styleFrom(
                                 padding: EdgeInsets.all(0.0),
                                 shape: new RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(12.0),
