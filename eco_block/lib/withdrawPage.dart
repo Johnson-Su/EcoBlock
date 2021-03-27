@@ -105,6 +105,47 @@ class WithdrawPage extends StatelessWidget {
                                 ),
                               ),
                             ),
+
+                            //UID
+                            Container(
+                              margin: EdgeInsets.only(top: 30, bottom: 10),
+                              child: Text(
+                                "UID",
+                                style: GoogleFonts.karla(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                for (int i = 0; i < 3; i++) //3 containers
+                                  Container(
+                                    height: 20,
+                                    width: 72,
+                                    child: TextField(
+                                      cursorColor: Colors.black,
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 3,
+                                      decoration: InputDecoration(
+                                        // filled: true,
+                                        counterText: '',
+                                        // fillColor: Colors.white54,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+
                             //Confirm button
                             Center(
                               child: Container(
