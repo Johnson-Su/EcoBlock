@@ -11,7 +11,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 16.0),
+      margin: EdgeInsets.only(left:30.0, top:32.0, right:30.0, bottom:5.0),
       height: 180,
       width: 315,
       decoration: BoxDecoration(
@@ -104,9 +104,9 @@ class Buttons extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.only(top: 24.0, left: 30.0),
-          height: 40,
-          width: 135,
-          child: ElevatedButton(
+          height: 45,
+          width: 150,
+          child: TextButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -116,7 +116,7 @@ class Buttons extends StatelessWidget {
                 ),
               );
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               padding: EdgeInsets.all(0.0),
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(10.0),
@@ -124,15 +124,8 @@ class Buttons extends StatelessWidget {
             ),
             child: Ink(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment(1.0, 1.0),
-                  colors: <Color>[
-                    Color(0xff1AB08D),
-                    Color(0xff50EE5E),
-                  ],
-                ),
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xff1ab08d)
               ),
               child: Center(
                 child: Text(
@@ -147,10 +140,10 @@ class Buttons extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 9.0, right: 20.0),
+          margin: EdgeInsets.only(top: 24.0, right: 30.0),
           height: 45,
-          width: 155,
-          child: ElevatedButton(
+          width: 150,
+          child: TextButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -160,20 +153,16 @@ class Buttons extends StatelessWidget {
                 ),
               );
             },
-            style: ElevatedButton.styleFrom(
+            style: TextButton.styleFrom(
               padding: EdgeInsets.all(0.0),
               shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(12.0),
+                borderRadius: new BorderRadius.circular(10.0),
               ),
             ),
             child: Ink(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment(1.0, 1.0),
-                  colors: <Color>[Color(0xff1AB08D), Color(0xff50EE5E)],
-                ),
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xff50EE5E),
               ),
               child: Center(
                 child: Text(

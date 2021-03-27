@@ -15,7 +15,7 @@ class HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 24.0),
       child: Text(
         widget.title,
         style: GoogleFonts.karla(
