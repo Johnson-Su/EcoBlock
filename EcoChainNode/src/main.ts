@@ -1,15 +1,17 @@
 import * as  bodyParser from 'body-parser';
 import * as express from 'express';
 import * as _ from 'lodash';
+import * as fs from 'fs';
 import {
     Block, generateNextBlock, generatenextBlockWithTransaction, generateRawNextBlock, getAccountBalance,
     getBlockchain, getMyUnspentTransactionOutputs, getUnspentTxOuts, sendTransaction
 } from './blockchain';
-import {connectToPeers, getSockets, initP2PServer} from './p2p';
+import {connectToPeers, getSockets, initP2PServer, tryInitialConnections} from './p2p';
 import {UnspentTxOut} from './transaction';
 import {getTransactionPool} from './transactionPool';
 import {getPublicFromWallet, initWallet} from './wallet';
 import {FirebaseService} from './firebaseService';
+import { exception } from 'node:console';
 
 const httpPort: number = parseInt(process.env.HTTP_PORT) || 3000;
 const p2pPort: number = parseInt(process.env.P2P_PORT) || 6000;
@@ -39,6 +41,21 @@ function updateFirebase() {
         fbService.addData(walletId, data);
         console.log("DB updated for this node");
 }
+
+function tryConnections() {
+    console.log("Trying to find some peers...")
+    try {
+        const data = fs.readFileSync('node/peerData/defaultPeers', 'utf8');
+        const portList = data.split(/\r?\n/);
+        portList.pop();
+
+        tryInitialConnections(portList);
+    }
+    catch (e){
+        console.log(e);
+    }
+};
+
 
 const initHttpServer = (myHttpPort: number) => {
     const app = express();
@@ -175,3 +192,4 @@ initWallet();
 console.log("Your address is: " + getPublicFromWallet());
 initHttpServer(httpPort);
 initP2PServer(p2pPort);
+tryConnections();

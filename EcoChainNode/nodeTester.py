@@ -56,16 +56,18 @@ if __name__ == "__main__":
     URL = set_url()
     # Just to exit when I want to
     cont = True
-
+    
+    print("---------------------------------------------------")
+    print("EcoBlock Blockchain Visualizer")
+    print("---------------------------------------------------")
     while (cont):
-        print("---------------------------------------------------")
         print("HTTP_PORT = " + HTTP_PORT)
         print("P2P_PORT = " + P2P_PORT)
         print("URL = " + URL)
         print(f"Saved Ports: {SAVED_PORTS}")
         print("---------------------------------------------------")
         menu = """1 - Get Blockchain\n2 - Mint Block\n3 - Send TX\n4 - Get TX Pool\n5 - Mint TX\n6 - Get Balance\n7 - Query Address\n8 - Add Peer\n9 - Get Peers\n0 - update DB\nc - Change Ports\nsave - Save Current Ports\nload - Load A Saved Port\nbulk - Bulk Add ports to saved\nx - Exit\n"""
-        choice = input(menu)
+        choice = input(menu + "---------------------------------------------------\n")
         try:
             if choice == "1":
                 print(json.dumps(get_blockchain(), indent=1))

@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import * as WebSocket from 'ws';
 import {Server} from 'ws';
 import {
@@ -7,6 +8,7 @@ import {
 import {Transaction} from './transaction';
 import {getTransactionPool} from './transactionPool';
 
+let homePort;
 const sockets: WebSocket[] = [];
 
 enum MessageType {
@@ -27,6 +29,7 @@ const initP2PServer = (p2pPort: number) => {
     server.on('connection', (ws: WebSocket) => {
         initConnection(ws);
     });
+    homePort = "ws://localhost:" + p2pPort
     console.log('P2P listening on: ' + p2pPort);
 };
 
@@ -174,6 +177,26 @@ const broadcastLatest = (): void => {
     broadcast(responseLatestMsg());
 };
 
+const tryInitialConnections = (defaultPeers: string[]): void => {
+
+
+    // Try to find some peers from a default file
+    defaultPeers.forEach(peer => {
+        if (isEqual(peer, homePort)) {
+            return
+        }
+        const ws: WebSocket = new WebSocket(peer);
+        ws.on('open', () => {
+
+            initConnection(ws);
+            console.log("Found peer " + peer);
+        });
+        ws.on('error', () => {
+        });
+    });
+
+};
+
 const connectToPeers = (newPeer: string): void => {
     const ws: WebSocket = new WebSocket(newPeer);
     ws.on('open', () => {
@@ -188,4 +211,4 @@ const broadCastTransactionPool = () => {
     broadcast(responseTransactionPoolMsg());
 };
 
-export {connectToPeers, broadcastLatest, broadCastTransactionPool, initP2PServer, getSockets};
+export {connectToPeers, broadcastLatest, broadCastTransactionPool, initP2PServer, getSockets, tryInitialConnections};
