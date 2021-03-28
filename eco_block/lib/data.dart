@@ -55,38 +55,7 @@ LineChartData sampleData() {
     lineBarsData: mockData(),
     gridData: FlGridData(show: false),
     borderData: FlBorderData(show: false),
-    lineTouchData: LineTouchData(
-        touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: Colors.blueGrey,
-            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              String weekDay;
-              switch (group.x.toInt()) {
-                case 0:
-                  weekDay = 'Monday';
-                  break;
-                case 1:
-                  weekDay = 'Tuesday';
-                  break;
-                case 2:
-                  weekDay = 'Wednesday';
-                  break;
-                case 3:
-                  weekDay = 'Thursday';
-                  break;
-                case 4:
-                  weekDay = 'Friday';
-                  break;
-                case 5:
-                  weekDay = 'Saturday';
-                  break;
-                case 6:
-                  weekDay = 'Sunday';
-                  break;
-              }
-              return BarTooltipItem(weekDay + '\n' + (rod.y - 1).toString(),
-                  TextStyle(color: Colors.yellow));
-            }),
-        handleBuiltInTouches: true),
+    lineTouchData: LineTouchData(handleBuiltInTouches: true),
     titlesData: FlTitlesData(
       show: true,
       bottomTitles: SideTitles(
