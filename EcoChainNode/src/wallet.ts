@@ -24,8 +24,11 @@ const generatePrivateKey = (): string => {
 };
 
 const initWallet = () => {
+    console.log(privateKeyLocation);
     // let's not override existing private keys
     if (existsSync(privateKeyLocation)) {
+        console.log("Private Key Exists");
+        console.log("Public Key is: " + getPublicFromWallet());
         return;
     }
     const newPrivateKey = generatePrivateKey();

@@ -157,7 +157,7 @@ const initHttpServer = (myHttpPort: number) => {
     });
     app.post('/addPeer', (req, res) => {
         connectToPeers(req.body.peer);
-        res.send();
+        res.send({"msg": "success"});
     });
 
     app.post('/stop', (req, res) => {
