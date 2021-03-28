@@ -56,11 +56,11 @@ class Dashboard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 68,
+            top: 70,
             left: 24,
             child: Container(
               height: 30,
-              width: 140,
+              width: 142,
               child: TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -74,12 +74,12 @@ class Dashboard extends StatelessWidget {
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(0.0),
                   shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(15.0),
+                    borderRadius: new BorderRadius.circular(20.0),
                   ),
                 ),
                 child: Ink(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
                   ),
                   child: Align(
@@ -98,8 +98,8 @@ class Dashboard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 71,
-            left: 28,
+            top: 72,
+            left: 30,
             child: Icon(CupertinoIcons.rocket_fill, color: Colors.red),
           ),
           Positioned(
