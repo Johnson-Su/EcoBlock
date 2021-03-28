@@ -116,7 +116,7 @@ const initHttpServer = (myHttpPort: number) => {
     app.get('/updateFirebase', (req, res) => {
 
         updateFirebase()
-        res.send("DB updated");
+        res.send({"msg": "DB updated"});
     });
 
     app.post('/mintTransaction', (req, res) => {
