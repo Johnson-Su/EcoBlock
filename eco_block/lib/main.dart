@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dashboard.dart';
 import 'data.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 //For titles
 class Header extends StatefulWidget {
@@ -19,9 +20,7 @@ class HeaderState extends State<Header> {
       child: Text(
         widget.title,
         style: GoogleFonts.karla(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black),
+            fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
       ),
     );
   }
@@ -38,6 +37,13 @@ class HomePage extends StatelessWidget {
             Dashboard(),
             Buttons(),
             Header(title: "Finances"),
+            //Graph
+            Container(
+              height: 180,
+              child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  child: LineChart(sampleData())),
+            ),
             Header(title: "Transactions"),
             for (Transaction trans in transactions)
               Container(
