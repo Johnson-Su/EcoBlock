@@ -7,11 +7,12 @@ import {
     getBlockchain, getMyUnspentTransactionOutputs, getUnspentTxOuts, sendTransaction
 } from './blockchain';
 import {connectToPeers, getSockets, initP2PServer, tryInitialConnections} from './p2p';
-import {UnspentTxOut} from './transaction';
+import {UnspentTxOut, TxIn} from './transaction';
 import {getTransactionPool} from './transactionPool';
 import {getPublicFromWallet, initWallet} from './wallet';
 import {FirebaseService} from './firebaseService';
 import { exception } from 'node:console';
+import { find } from 'lodash';
 
 const httpPort: number = parseInt(process.env.HTTP_PORT) || 3000;
 const p2pPort: number = parseInt(process.env.P2P_PORT) || 6000;
@@ -22,15 +23,55 @@ const ecoBoost = process.env.ECOBOOST == "true";
 
 const fbService = new FirebaseService();
 
+
+function getTxHistory() {
+
+    let txHistory = [];
+    getBlockchain().forEach(block => {
+
+        const time = block.timestamp;
+
+        block.data.forEach(tx => {
+
+            tx.txOuts.forEach(txOut => {
+                if (txOut.address === getPublicFromWallet() && txOut.sender === getPublicFromWallet()) {
+                    txHistory.push({
+                        "type": "self",
+                        "time": time,
+                        "amount": txOut.amount,
+                    });
+                }
+                else if (txOut.sender === getPublicFromWallet()) {
+                    txHistory.push({
+                        "type": "outbound",
+                        "time": time,
+                        "amount": txOut.amount,
+                        "reciever": txOut.address
+                    });
+                }
+                else if (txOut.address === getPublicFromWallet()) {
+                    txHistory.push({
+                        "type": "inbound",
+                        "time": time,
+                        "amount": txOut.amount,
+                        "sender": txOut.sender
+                    });
+                }
+            });
+            
+        });
+        
+    });
+
+    return txHistory;
+}
+
 function updateFirebase() {
     const walletId = getPublicFromWallet();
 
-        const tx = _(getBlockchain())
-            .map((blocks) => blocks.data)
-            .flatten()
-            .find({'id': walletId});
-
+        const tx = getTxHistory()
         const data = {
+            id: walletId,
             first: fName,
             last: lName,
             balance: getAccountBalance() || 0,

@@ -1,6 +1,7 @@
 # EcoBlock
 ## **Simple, Scalable, and Sustainable Blockchain**
 
+![](Assets/ecoblock.gif)
 ### **What is EcoBlock?**
 Cryptocurrency uses countries worth of electricity, it is said it uses more energy per year than the UK! In order to solve this problem, EcoBlock was made. EcoBlock is a crypto currency which uses the growing concept of a Proof of Stake algorithm, rather than the current Proof of Work algorithm, to manage the blockchain. EcoBlock aims to reduce the environmental impact of cryptocurrency and incentivise minters who use green sources of energy. (In Proof of Stake crypto, users are called minters) 
 ### **Proof of Stake?**
