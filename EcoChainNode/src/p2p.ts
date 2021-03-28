@@ -27,7 +27,7 @@ const initP2PServer = (p2pPort: number) => {
     server.on('connection', (ws: WebSocket) => {
         initConnection(ws);
     });
-    console.log('listening websocket p2p port on: ' + p2pPort);
+    console.log('P2P listening on: ' + p2pPort);
 };
 
 const getSockets = () => sockets;

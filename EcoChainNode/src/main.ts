@@ -166,10 +166,11 @@ const initHttpServer = (myHttpPort: number) => {
     });
 
     app.listen(myHttpPort, () => {
-        console.log('Listening http on port: ' + myHttpPort);
+        console.log('HTTP listening on port: ' + myHttpPort);
     });
 };
 
+initWallet();
+console.log("Your address is: " + getPublicFromWallet());
 initHttpServer(httpPort);
 initP2PServer(p2pPort);
-initWallet();
