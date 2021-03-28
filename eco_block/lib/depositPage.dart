@@ -14,10 +14,6 @@ class DepositPage extends StatelessWidget {
             //all greyed out content
             ColorFiltered(
               colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken),
-              child: Header(title: "Overview"),
-            ),
-            ColorFiltered(
-              colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken),
               child: Dashboard(),
             ),
             AbsorbPointer(

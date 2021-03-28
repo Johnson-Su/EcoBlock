@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'data.dart';
 import 'depositPage.dart';
 import 'withdrawPage.dart';
+import 'boostPage.dart';
 
 final balanceFormat = new NumberFormat("#,##0.00", "en_US");
 
@@ -11,7 +13,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left:30.0, top:32.0, right:30.0, bottom:5.0),
+      margin: EdgeInsets.only(left: 30.0, top: 32.0, right: 30.0, bottom: 5.0),
       height: 180,
       width: 315,
       decoration: BoxDecoration(
@@ -48,10 +50,57 @@ class Dashboard extends StatelessWidget {
             child: Text(
               "UID: " + user1.UID,
               style: GoogleFonts.karla(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.white.withOpacity(0.8)),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white.withOpacity(0.8)),
             ),
+          ),
+          Positioned(
+            top: 68,
+            left: 24,
+            child: Container(
+              height: 30,
+              width: 140,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          BoostPage(),
+                    ),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.all(0.0),
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(15.0),
+                  ),
+                ),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: Align(
+                    alignment: Alignment(0.4, 0),
+                    child: Text(
+                      "Tap for EcoBoost",
+                      textAlign: TextAlign.end,
+                      style: GoogleFonts.karla(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 71,
+            left: 28,
+            child: Icon(CupertinoIcons.rocket_fill, color: Colors.red),
           ),
           Positioned(
             bottom: 58,
@@ -59,15 +108,15 @@ class Dashboard extends StatelessWidget {
             child: Text(
               "BALANCE",
               style: GoogleFonts.karla(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.white.withOpacity(0.8)),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white.withOpacity(0.8)),
             ),
           ),
           Row(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(top:122, left: 24),
+                padding: EdgeInsets.only(top: 122, left: 24),
                 child: Text(
                   balanceFormat.format(user1.balance).toString(),
                   style: GoogleFonts.karla(
@@ -124,9 +173,8 @@ class Buttons extends StatelessWidget {
             ),
             child: Ink(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color(0xff1ab08d)
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xff1ab08d)),
               child: Center(
                 child: Text(
                   "Deposit",
