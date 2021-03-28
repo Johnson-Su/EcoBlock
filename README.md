@@ -34,7 +34,7 @@ You have to set Environment Variables for the servers to run before `npm start`
 **With this you can start up as many nodes as you want!**
 
 ### **Interact with EcoBlock!**
-With the nodes set up, you can interact with them using a python program `nodeTester.py`. Navigate to `/EcoChainNode` and run `nodeTester.py`. Start by adding the Ports of your nodes by typing `bulk` and adding them all in. You can manually change nodes by typing `c` or load a saved node using `load`. Now start connecting your nodes together by typing `8` on any node to add a peer, and keep adding all your other nodes, remember to use your P2P Port. (Depeding on what port # you selected the nodes might have already connected via automatic peer fi
+With the nodes set up, you can interact with them using a python program `nodeTester.py`. Navigate to `/EcoChainNode` and run `nodeTester.py`. Start by adding the Ports of your nodes by typing `bulk` and adding them all in. You can manually change nodes by typing `c` or load a saved node using `load`. Now start connecting your nodes together by typing `8` on any node to add a peer, and keep adding all your other nodes, remember to use your P2P Port. (Depeding on what port # you selected the nodes might have already connected via automatic peer finding)
 
 ### Source
 https://naivecoinstake.learn.uno/
