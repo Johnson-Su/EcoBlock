@@ -3,3 +3,4 @@ EcoChainNode/npm-debug.log
 .idea
 EcoChainNode/src/*.js
 EcoChainNode/src/*.map
+EcoChainNode/node/wallet/private_key
