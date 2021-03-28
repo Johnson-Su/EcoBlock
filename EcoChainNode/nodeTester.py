@@ -64,7 +64,7 @@ if __name__ == "__main__":
         print("URL = " + URL)
         print(f"Saved Ports: {SAVED_PORTS}")
         print("---------------------------------------------------")
-        menu = """1 - Get Blockchain\n2 - Mint Block\n3 - Send TX\n4 - Get TX Pool\n5 - Mint TX\n6 - Get Balance\n7 - Query Address\n8 - Add Peer\n9 - Get Peers\n0 - update DB\nc - Change Ports\nsave - Save Current Ports\nload - Load A Saved Port\nx - Exit\n"""
+        menu = """1 - Get Blockchain\n2 - Mint Block\n3 - Send TX\n4 - Get TX Pool\n5 - Mint TX\n6 - Get Balance\n7 - Query Address\n8 - Add Peer\n9 - Get Peers\n0 - update DB\nc - Change Ports\nsave - Save Current Ports\nload - Load A Saved Port\nbulk - Bulk Add ports to saved\nx - Exit\n"""
         choice = input(menu)
         try:
             if choice == "1":
@@ -74,13 +74,13 @@ if __name__ == "__main__":
             elif choice == "3":
                 address = input("Address to Send (Public Key): ")
                 amount = input("Amount to Send: ")
-                print(json.dumps(send_transaction(address, amount), indent=1))
+                print(json.dumps(send_transaction(address, int(amount)), indent=1))
             elif choice == "4":
                 print(json.dumps(get_tx_pool(), indent=1))
             elif choice == "5":
                 address = input("Address to Mint (Public Key): ")
                 amount = input("Amount to Mint: ")
-                print(json.dumps(mint_tx(address, amount), indent=1))
+                print(json.dumps(mint_tx(address, int(amount)), indent=1))
             elif choice == "6":
                 print(get_balance())
             elif choice == "7":
@@ -113,8 +113,16 @@ if __name__ == "__main__":
                     print(f"Loaded HTTP Port {HTTP_PORT} and P2P Port {P2P_PORT}")
                 else:
                     print("Invalid ID")
+            elif choice.lower() == "bulk":
+                num = input("How many nodes do you want to add? ")
+                for i in range(int(num)):
+                    posth = input("Enter HTTP Port: ")
+                    postp = input("Enter P2P Port: ")
+                    SAVED_PORTS[len(SAVED_PORTS) + 1] = [posth, postp]
             elif choice.lower() == "x":
                 cont = False
+            else:
+                print("Invalid Command")
         except Exception as e:
             print(e)
 
