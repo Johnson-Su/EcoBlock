@@ -13,7 +13,21 @@ A Proof of Stake uses a lottery system in order to validate the blockchain. Comp
 3. `npm install` to install dependancies (Only have to do this once)
 
 **Windows Users** \
-There is a `.bat` file called `nodeInit.bat` to somewhat automate the node server creation. Run that and follow the prompts, it is important that the `HTTP Port`, `P2P Port`, and `Private Key File Name` are different for all nodes. If there is no input the prompts will take a default value. `EcoBoost` is a setting that will turn on a setting proving you use green energy.
+Start by setting up windows Environment Variables: Start by setting up windows environment variables: [Tutorial Here](https://superuser.com/questions/949560/how-do-i-set-system-environment-variables-in-windows-10)
+Set the folowing variables in the user environment variables:
+|Variable | Value |
+| ------ | ------| 
+| HTTP_PORT |  3001 |
+| P2P_PORT | 6001 |
+| WALLETFNAME | Anything you want |
+| WALLETLNAME | Anything you want|
+| PRIVATE_KEY | node/wallet/private_key|
+|ECOBOOST | false|
+
+There is a `.bat` file called `nodeInit.bat` to somewhat automate the node server creation. Run that and follow the prompts, it is important that the `HTTP Port`, `P2P Port`, and `Private Key File Name` are different for all nodes. 
+- If there is no input the prompts will take a default value. 
+- `EcoBoost` is a setting that will turn on a setting proving you use green energy.
+  
 | Prompt           | Input                                                                           |
 |------------------|---------------------------------------------------------------------------------|
 | HTTP Port        | Some 4 digit number (Ex. 3000, 3001 ...) **DEFAULT: 3001**                      |
@@ -36,6 +50,6 @@ You have to set Environment Variables for the servers to run before `npm start`
 ### **Interact with EcoBlock!**
 With the nodes set up, you can interact with them using a python program `nodeTester.py`. Navigate to `/EcoChainNode` and run `nodeTester.py`. Start by adding the Ports of your nodes by typing `bulk` and adding them all in. You can manually change nodes by typing `c` or load a saved node using `load`. Now start connecting your nodes together by typing `8` on any node to add a peer, and keep adding all your other nodes, remember to use your P2P Port. (Depeding on what port # you selected the nodes might have already connected via automatic peer finding)
 
-### Source
+### Source for Blockchain
 https://naivecoinstake.learn.uno/
 
