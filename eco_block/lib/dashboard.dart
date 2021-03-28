@@ -6,6 +6,7 @@ import 'data.dart';
 import 'depositPage.dart';
 import 'withdrawPage.dart';
 import 'boostPage.dart';
+import 'rest.dart';
 
 final balanceFormat = new NumberFormat("#,##0.00", "en_US");
 
