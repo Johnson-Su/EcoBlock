@@ -1,0 +1,1 @@
+Private Keys Go here automatically, this place is more simple private key storage. Should be encrypted but to keep it simple.

@@ -1,15 +1,18 @@
 import * as  bodyParser from 'body-parser';
 import * as express from 'express';
 import * as _ from 'lodash';
+import * as fs from 'fs';
 import {
     Block, generateNextBlock, generatenextBlockWithTransaction, generateRawNextBlock, getAccountBalance,
     getBlockchain, getMyUnspentTransactionOutputs, getUnspentTxOuts, sendTransaction
 } from './blockchain';
-import {connectToPeers, getSockets, initP2PServer} from './p2p';
-import {UnspentTxOut} from './transaction';
+import {connectToPeers, getSockets, initP2PServer, tryInitialConnections} from './p2p';
+import {UnspentTxOut, TxIn} from './transaction';
 import {getTransactionPool} from './transactionPool';
 import {getPublicFromWallet, initWallet} from './wallet';
 import {FirebaseService} from './firebaseService';
+import { exception } from 'node:console';
+import { find } from 'lodash';
 
 const httpPort: number = parseInt(process.env.HTTP_PORT) || 3000;
 const p2pPort: number = parseInt(process.env.P2P_PORT) || 6000;
@@ -20,15 +23,55 @@ const ecoBoost = process.env.ECOBOOST == "true";
 
 const fbService = new FirebaseService();
 
+
+function getTxHistory() {
+
+    let txHistory = [];
+    getBlockchain().forEach(block => {
+
+        const time = block.timestamp;
+
+        block.data.forEach(tx => {
+
+            tx.txOuts.forEach(txOut => {
+                if (txOut.address === getPublicFromWallet() && txOut.sender === getPublicFromWallet()) {
+                    txHistory.push({
+                        "type": "self",
+                        "time": time,
+                        "amount": txOut.amount,
+                    });
+                }
+                else if (txOut.sender === getPublicFromWallet()) {
+                    txHistory.push({
+                        "type": "outbound",
+                        "time": time,
+                        "amount": txOut.amount,
+                        "reciever": txOut.address
+                    });
+                }
+                else if (txOut.address === getPublicFromWallet()) {
+                    txHistory.push({
+                        "type": "inbound",
+                        "time": time,
+                        "amount": txOut.amount,
+                        "sender": txOut.sender
+                    });
+                }
+            });
+            
+        });
+        
+    });
+
+    return txHistory;
+}
+
 function updateFirebase() {
     const walletId = getPublicFromWallet();
 
-        const tx = _(getBlockchain())
-            .map((blocks) => blocks.data)
-            .flatten()
-            .find({'id': walletId});
-
+        const tx = getTxHistory()
         const data = {
+            id: walletId,
             first: fName,
             last: lName,
             balance: getAccountBalance() || 0,
@@ -39,6 +82,21 @@ function updateFirebase() {
         fbService.addData(walletId, data);
         console.log("DB updated for this node");
 }
+
+function tryConnections() {
+    console.log("Trying to find some peers...")
+    try {
+        const data = fs.readFileSync('node/peerData/defaultPeers', 'utf8');
+        const portList = data.split(/\r?\n/);
+        portList.pop();
+
+        tryInitialConnections(portList);
+    }
+    catch (e){
+        console.log(e);
+    }
+};
+
 
 const initHttpServer = (myHttpPort: number) => {
     const app = express();
@@ -96,6 +154,7 @@ const initHttpServer = (myHttpPort: number) => {
 
     app.post('/mintBlock', (req, res) => {
         const newBlock: Block = generateNextBlock();
+        updateFirebase()
         if (newBlock === null) {
             res.status(400).send('could not generate block');
         } else {
@@ -174,3 +233,4 @@ initWallet();
 console.log("Your address is: " + getPublicFromWallet());
 initHttpServer(httpPort);
 initP2PServer(p2pPort);
+tryConnections();

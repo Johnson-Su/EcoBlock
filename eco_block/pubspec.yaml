@@ -16,6 +16,10 @@ dependencies:
   fl_chart: ^0.20.1
   googleapis: any
   googleapis_auth: any
+<<<<<<< HEAD
+=======
+  firebase_ml_vision: ^0.11.0
+>>>>>>> c3bb21b38d790a8268ea6444fa33844c12f4b6c5
   image_picker: 0.4.12+1
 
 dev_dependencies:

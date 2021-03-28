@@ -28,11 +28,13 @@ class TxIn {
 
 class TxOut {
     public address: string;
+    public sender: string;
     public amount: number;
 
-    constructor(address: string, amount: number) {
+    constructor(sender: string, address: string, amount: number) {
         this.address = address;
         this.amount = amount;
+        this.sender = sender;
     }
 }
 
@@ -191,7 +193,7 @@ const getCoinbaseTransaction = (address: string, blockIndex: number): Transactio
     txIn.txOutIndex = blockIndex;
 
     t.txIns = [txIn];
-    t.txOuts = [new TxOut(address, COINBASE_AMOUNT)];
+    t.txOuts = [new TxOut("coinbase", address, COINBASE_AMOUNT)];
     t.id = getTransactionId(t);
     return t;
 };

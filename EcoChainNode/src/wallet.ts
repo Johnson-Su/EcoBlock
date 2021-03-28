@@ -68,11 +68,11 @@ const findTxOutsForAmount = (amount: number, myUnspentTxOuts: UnspentTxOut[]) =>
 };
 
 const createTxOuts = (receiverAddress: string, myAddress: string, amount, leftOverAmount: number) => {
-    const txOut1: TxOut = new TxOut(receiverAddress, amount);
+    const txOut1: TxOut = new TxOut(myAddress, receiverAddress, amount);
     if (leftOverAmount === 0) {
         return [txOut1];
     } else {
-        const leftOverTx = new TxOut(myAddress, leftOverAmount);
+        const leftOverTx = new TxOut(myAddress, myAddress, leftOverAmount);
         return [txOut1, leftOverTx];
     }
 };
@@ -112,6 +112,7 @@ const createTransaction = (receiverAddress: string, amount: number, privateKey: 
 
     const toUnsignedTxIn = (unspentTxOut: UnspentTxOut) => {
         const txIn: TxIn = new TxIn();
+
         txIn.txOutId = unspentTxOut.txOutId;
         txIn.txOutIndex = unspentTxOut.txOutIndex;
         return txIn;

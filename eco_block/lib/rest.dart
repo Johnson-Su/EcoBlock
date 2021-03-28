@@ -22,11 +22,19 @@ final _credentials = ServiceAccountCredentials.fromJson(r'''
 Future<http.Response> createAlbum(String encodedImg) async {
   http.Response response = await http.post(
     Uri.https('vision.googleapis.com', "/v1/images:annotate",
+<<<<<<< HEAD
         {"key": "AIzaSyAYGbrGbUCP9UY1eRm7f3jlFnc0su9kBYk"}),
     headers: {
       'Content-Type': 'application/json',
       'Authorization':
           'ya29.a0AfH6SMCuLQjscqd18ywdh0pYj8AdrB_vEsA0-Aj2mYKQtupuWW--YM3HZ2MC_0ewJvtF4rT1LGpj7g11IXDyBfUQ48LYXChTLaj6hQs94R6DcuQ8h35sevlBplTWBYYxS_J-sBkU_a2io_nK7_U9fYUablYptWDcZHfL',
+=======
+        {"key": "REMOVED BECAUSE SENSITIVE DATA"}),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization':
+          'REMOVED BECAUSE SENSITIVE DATA',
+>>>>>>> c3bb21b38d790a8268ea6444fa33844c12f4b6c5
     },
     body: jsonEncode({
       "requests": [
@@ -39,6 +47,7 @@ Future<http.Response> createAlbum(String encodedImg) async {
       ]
     }),
   );
+<<<<<<< HEAD
   print("Yay");
 
   // final response = await http.post(
@@ -63,6 +72,9 @@ Future<http.Response> createAlbum(String encodedImg) async {
   //     },
   //   ),
   // );
+=======
+
+>>>>>>> c3bb21b38d790a8268ea6444fa33844c12f4b6c5
   if (response.statusCode == 201) {
     // 201 CREATED response,
     return (jsonDecode(response.body));
@@ -84,6 +96,7 @@ class Album {
       title: json['title'],
     );
   }
+<<<<<<< HEAD
 }
 
 // /curl -X POST \
@@ -91,3 +104,6 @@ class Album {
 // -H "Content-Type: application/json; charset=utf-8" \
 // -d @request.json \
 // https://vision.googleapis.com/v1/images:annotate
+=======
+}
+>>>>>>> c3bb21b38d790a8268ea6444fa33844c12f4b6c5
