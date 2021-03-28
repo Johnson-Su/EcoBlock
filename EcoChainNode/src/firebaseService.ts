@@ -22,23 +22,8 @@ export class FirebaseService
         
     }
     
-    public async addData(text: string): Promise<void>
+    public async addData(publicKey: string, data: object): Promise<void>
     {
-        await this._db.collection("collection").doc().set({
-                text: text
-            });
-    }
-    
-    public async fetchAllData(): Promise<Array<String>>
-    {
-        const dbData = new Array;
-        const docs = await this._db.collection("collection").get();
-            docs.forEach(t =>
-            {
-                dbData.push({
-                    text: t.data().text
-                });
-            });
-        return dbData;
+        await this._db.collection("Wallets").doc(publicKey).set(data);
     }
 }

@@ -9,9 +9,36 @@ import {connectToPeers, getSockets, initP2PServer} from './p2p';
 import {UnspentTxOut} from './transaction';
 import {getTransactionPool} from './transactionPool';
 import {getPublicFromWallet, initWallet} from './wallet';
+import {FirebaseService} from './firebaseService';
 
-const httpPort: number = parseInt(process.env.HTTP_PORT) || 3001;
-const p2pPort: number = parseInt(process.env.P2P_PORT) || 6001;
+const httpPort: number = parseInt(process.env.HTTP_PORT) || 3000;
+const p2pPort: number = parseInt(process.env.P2P_PORT) || 6000;
+
+const fName: string = process.env.WALLETFNAME || "";
+const lName: string = process.env.WALLETLNAME || "";
+const ecoBoost = process.env.ECOBOOST == "true";
+
+const fbService = new FirebaseService();
+
+function updateFirebase() {
+    const walletId = getPublicFromWallet();
+
+        const tx = _(getBlockchain())
+            .map((blocks) => blocks.data)
+            .flatten()
+            .find({'id': walletId});
+
+        const data = {
+            first: fName,
+            last: lName,
+            balance: getAccountBalance() || 0,
+            txHistory: tx || [],
+            ecoBoost:  ecoBoost
+        };
+
+        fbService.addData(walletId, data);
+        console.log("DB updated for this node");
+}
 
 const initHttpServer = (myHttpPort: number) => {
     const app = express();
@@ -86,6 +113,12 @@ const initHttpServer = (myHttpPort: number) => {
         res.send({'address': address});
     });
 
+    app.get('/updateFirebase', (req, res) => {
+
+        updateFirebase()
+        res.send("DB updated");
+    });
+
     app.post('/mintTransaction', (req, res) => {
         const address = req.body.address;
         const amount = req.body.amount;
@@ -107,6 +140,7 @@ const initHttpServer = (myHttpPort: number) => {
                 throw Error('invalid address or amount');
             }
             const resp = sendTransaction(address, amount);
+            updateFirebase()
             res.send(resp);
         } catch (e) {
             console.log(e.message);
