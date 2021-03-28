@@ -4,3 +4,4 @@ EcoChainNode/npm-debug.log
 EcoChainNode/src/*.js
 EcoChainNode/src/*.map
 EcoChainNode/node/wallet/*
+!note.txt
