@@ -116,7 +116,7 @@ const initHttpServer = (myHttpPort: number) => {
     app.get('/updateFirebase', (req, res) => {
 
         updateFirebase()
-        res.send("DB updated");
+        res.send({"msg": "DB updated"});
     });
 
     app.post('/mintTransaction', (req, res) => {
@@ -157,7 +157,7 @@ const initHttpServer = (myHttpPort: number) => {
     });
     app.post('/addPeer', (req, res) => {
         connectToPeers(req.body.peer);
-        res.send();
+        res.send({"msg": "success"});
     });
 
     app.post('/stop', (req, res) => {
@@ -166,10 +166,11 @@ const initHttpServer = (myHttpPort: number) => {
     });
 
     app.listen(myHttpPort, () => {
-        console.log('Listening http on port: ' + myHttpPort);
+        console.log('HTTP listening on port: ' + myHttpPort);
     });
 };
 
+initWallet();
+console.log("Your address is: " + getPublicFromWallet());
 initHttpServer(httpPort);
 initP2PServer(p2pPort);
-initWallet();

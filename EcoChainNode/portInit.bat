@@ -7,3 +7,5 @@ SET /p port="Enter P2P Port: "
 IF "%port%" NEQ "" (
     SET P2P_PORT=%port%
 )
+
+python nodeTester.py

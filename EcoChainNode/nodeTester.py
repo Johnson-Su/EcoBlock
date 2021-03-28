@@ -1,9 +1,10 @@
 import requests as req
 import os, json
 
-HTTP_PORT = 0
-P2P_PORT = 0
-URL = ""
+SAVED_PORTS = {}
+
+def set_url():
+    return "http://localhost:" + HTTP_PORT + "/"
 
 def get_blockchain():
     return req.get(url = URL + "blocks").json()
@@ -21,22 +22,28 @@ def mint_tx(address, amount):
     return req.post(url = URL + "mintTransaction", json = {"address" : address, "amount" : amount}).json()
 
 def get_balance():
-    return req.get(url = URL + "balance")
+    return req.get(url = URL + "balance").json()
 
 def q_address(address = ""):
     if address == "":
-        return req.get(url = URL + "address")
+        return req.get(url = URL + "address").json()
     else:
-        return req.get(url = URL + "address/" + address)
+        return req.get(url = URL + "address/" + address).json()
 
 def add_peer(port):
-    return req.post(url = URL + "addPeer", json = {"peer" : "ws://localhost:" + port})
+
+    try:
+        data = req.post(url = URL + "addPeer", json = {"peer" : "ws://localhost:" + port}).json()
+    except Exception:
+        print(Exception)
+        data = req.post(url = URL + "addPeer", json = {"peer" : "ws://localhost:" + port})
+    return data
 
 def get_peers():
     return req.get(url = URL + "peers").json()
 
 def update_db():
-    return req.get(url = URL + "updateFirebase")
+    return req.get(url = URL + "updateFirebase").json()
 
 if __name__ == "__main__":
     # Grab HTTP env 
@@ -46,42 +53,70 @@ if __name__ == "__main__":
     env_var = os.getenv('P2P_PORT')
     P2P_PORT = "6000" if env_var == None or env_var == "" else env_var
     # Set Local URL
-    URL = "http://localhost:" + HTTP_PORT + "/"
+    URL = set_url()
     # Just to exit when I want to
     cont = True
 
     while (cont):
-        menu = """1 - Get Blockchain\n2 - Mint Block\n3 - Send TX\n4 - Get TX Pool\n5 - Mint TX\n6 - Get Balance\n7 - Query Address\n8 - Add Peer\n9 - Get Peers\n0 - update DB\nx - Exit\n"""
+        print("---------------------------------------------------")
+        print("HTTP_PORT = " + HTTP_PORT)
+        print("P2P_PORT = " + P2P_PORT)
+        print("URL = " + URL)
+        print(f"Saved Ports: {SAVED_PORTS}")
+        print("---------------------------------------------------")
+        menu = """1 - Get Blockchain\n2 - Mint Block\n3 - Send TX\n4 - Get TX Pool\n5 - Mint TX\n6 - Get Balance\n7 - Query Address\n8 - Add Peer\n9 - Get Peers\n0 - update DB\nc - Change Ports\nsave - Save Current Ports\nload - Load A Saved Port\nx - Exit\n"""
         choice = input(menu)
+        try:
+            if choice == "1":
+                print(json.dumps(get_blockchain(), indent=1))
+            elif choice == "2":
+                print(json.dumps(mint_block(), indent=1))
+            elif choice == "3":
+                address = input("Address to Send (Public Key): ")
+                amount = input("Amount to Send: ")
+                print(json.dumps(send_transaction(address, amount), indent=1))
+            elif choice == "4":
+                print(json.dumps(get_tx_pool(), indent=1))
+            elif choice == "5":
+                address = input("Address to Mint (Public Key): ")
+                amount = input("Amount to Mint: ")
+                print(json.dumps(mint_tx(address, amount), indent=1))
+            elif choice == "6":
+                print(get_balance())
+            elif choice == "7":
+                address = input("Address to Query (Public Key): (Hit enter for current Port Address) ")
+                print(q_address(address))
+            elif choice == "8":
+                port = input("P2P Port of Peer: ")
+                result = add_peer(port)
+                json.dumps(result, indent=1)
+            elif choice == "9":
+                print(json.dumps(get_peers(), indent=1))
+            elif choice == "0":
+                print(update_db())
+            elif choice.lower() == "c":
+                port = input("Port of HTTP: ")
+                HTTP_PORT = port
+                port = input("Port of P2P: ")
+                P2P_PORT = port
+                URL = set_url()
+            elif choice.lower() == "save":
+                SAVED_PORTS[len(SAVED_PORTS) + 1] = [HTTP_PORT, P2P_PORT]
+            elif choice.lower() == "load":
+                print(SAVED_PORTS)
+                id = input("Enter save ID: ")
+                id = int(id)
+                if id in SAVED_PORTS:
+                    HTTP_PORT = SAVED_PORTS[id][0]
+                    P2P_PORT = SAVED_PORTS[id][1]
+                    URL = set_url()
+                    print(f"Loaded HTTP Port {HTTP_PORT} and P2P Port {P2P_PORT}")
+                else:
+                    print("Invalid ID")
+            elif choice.lower() == "x":
+                cont = False
+        except Exception as e:
+            print(e)
 
-        if choice == "1":
-            print(json.dumps(get_blockchain(), indent=1))
-        elif choice == "2":
-            print(json.dumps(mint_block(), indent=1))
-        elif choice == "3":
-            address = input("Address to Send (Public Key): ")
-            amount = input("Amount to Send: ")
-            print(json.dumps(send_transaction(address, amount), indent=1))
-        elif choice == "4":
-            print(json.dumps(get_tx_pool(), indent=1))
-        elif choice == "5":
-            address = input("Address to Mint (Public Key): ")
-            amount = input("Amount to Mint: ")
-            print(json.dumps(mint_tx(address, amount), indent=1))
-        elif choice == "6":
-            print(get_balance())
-        elif choice == "7":
-            address = input("Address to Query (Public Key): (Hit enter for current Port Address)")
-            print(q_address(address))
-        elif choice == "8":
-            port = input("Port of Peer: ")
-            print(add_peer(port))
-        elif choice == "9":
-            print(get_peers())
-        elif choice == "0":
-            print(update_db())
-        elif choice.lower() == "x":
-            cont = False
-        
 
 
