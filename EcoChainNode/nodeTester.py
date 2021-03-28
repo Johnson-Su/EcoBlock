@@ -116,6 +116,7 @@ if __name__ == "__main__":
             elif choice.lower() == "bulk":
                 num = input("How many nodes do you want to add? ")
                 for i in range(int(num)):
+                    print(f"Ports for Node {i + 1}")
                     posth = input("Enter HTTP Port: ")
                     postp = input("Enter P2P Port: ")
                     SAVED_PORTS[len(SAVED_PORTS) + 1] = [posth, postp]

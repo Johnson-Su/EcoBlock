@@ -96,6 +96,7 @@ const initHttpServer = (myHttpPort: number) => {
 
     app.post('/mintBlock', (req, res) => {
         const newBlock: Block = generateNextBlock();
+        updateFirebase()
         if (newBlock === null) {
             res.status(400).send('could not generate block');
         } else {
